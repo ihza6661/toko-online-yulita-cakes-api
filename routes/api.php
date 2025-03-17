@@ -73,12 +73,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/orders', [AdminUserOrderController::class, 'index']);
     Route::get('/admin/orders/{id}', [AdminUserOrderController::class, 'show']);
     Route::put('/admin/orders/{id}', [AdminUserOrderController::class, 'updateStatus']);
-    
+
     // Payment
     Route::get('/admin/payments', [AdminUserPaymentController::class, 'index']);
     Route::get('/admin/payments/{id}', [AdminUserPaymentController::class, 'show']);
     Route::put('/admin/payments/{id}', [AdminUserPaymentController::class, 'updateStatus']);
-    
+
     // Shipment
     Route::get('/admin/shipments', [AdminUserShipmentController::class, 'index']);
     Route::put('/admin/shipments/{id}', [AdminUserShipmentController::class, 'update']);
@@ -120,7 +120,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/product/{productId}/review-eligibility', [SiteUserProductReviewController::class, 'reviewEligibility']);
     Route::put('/user/reviews/{reviewId}', [SiteUserProductReviewController::class, 'updateReview']);
     Route::delete('/user/reviews/{reviewId}', [SiteUserProductReviewController::class, 'destroyReview']);
-    
+
     // Payment
     Route::post('/midtrans/snap-token', [SiteUserPaymentController::class, 'initiatePayment']);
 
@@ -132,8 +132,9 @@ Route::post('/midtrans/notification', [SiteUserPaymentController::class, 'handle
 
 Route::get('/user/get_categories', [SiteUserProductController::class, 'getAllCategories']);
 Route::get('/user/get_products', [SiteUserProductController::class, 'getAllProducts']);
+Route::get('/user/get_latest_products', [SiteUserProductController::class, 'getLatesProducts']);
 Route::get('/user/product/{slug}/detail', [SiteUserProductController::class, 'getProductDetail']);
-
+Route::get('/user/get_related_products', [SiteUserProductController::class, 'getRelatedProducts']);
 // Proudct Review
 Route::get('/user/product/{productId}/reviews', [SiteUserProductReviewController::class, 'index']);
 

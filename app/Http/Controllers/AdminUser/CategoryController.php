@@ -68,39 +68,42 @@ class CategoryController extends Controller
 
         // Menghapus gambar lama jika ada gambar baru
         if ($request->hasFile('image')) {
-            if (Storage::disk('public')->exists($category->image)) {
+            // Pastikan gambar lama ada sebelum dihapus
+            if (!empty($category->image) && Storage::disk('public')->exists($category->image)) {
                 Storage::disk('public')->delete($category->image);
             }
+
+            // Simpan gambar baru
             $data['image'] = $request->file('image')->store('categories', 'public');
         }
 
+        // Perbarui kategori dengan data baru
         $category->update($data);
 
         return response()->json([
             'category' => $category,
             'message'  => 'Kategori berhasil diperbarui.',
         ], 200);
-    }
 
-    public function destroy($id)
-    {
-        $category = Category::find($id);
+    // public function destroy($id)
+    // {
+    //     $category = Category::find($id);
 
-        if (!$category) {
-            return response()->json([
-                'message' => 'Kategori tidak ditemukan.',
-            ], 404);
-        }
+    //     if (!$category) {
+    //         return response()->json([
+    //             'message' => 'Kategori tidak ditemukan.',
+    //         ], 404);
+    //     }
 
-        // Menghapus gambar kategori
-        if (Storage::disk('public')->exists($category->image)) {
-            Storage::disk('public')->delete($category->image);
-        }
+    //     // Menghapus gambar kategori
+    //     if (Storage::disk('public')->exists($category->image)) {
+    //         Storage::disk('public')->delete($category->image);
+    //     }
 
-        $category->delete();
+    //     $category->delete();
 
-        return response()->json([
-            'message' => 'Kategori berhasil dihapus.',
-        ], 200);
+    //     return response()->json([
+    //         'message' => 'Kategori berhasil dihapus.',
+    //     ], 200);
     }
 }

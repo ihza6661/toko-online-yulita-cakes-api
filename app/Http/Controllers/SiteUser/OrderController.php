@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 
 class OrderController extends Controller
-{    
+{
     public function getUserOrder(Request $request)
     {
         $user = $request->user();
@@ -15,7 +15,6 @@ class OrderController extends Controller
         // Mengambil pesanan milik pengguna saat ini
         $orders = Order::with(['orderItems.product', 'address'])
             ->where('site_user_id', $user->id)
-            ->where('status', 'paid')
             ->orderBy('created_at', 'desc')
             ->get();
 

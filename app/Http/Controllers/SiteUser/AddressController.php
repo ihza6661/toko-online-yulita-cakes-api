@@ -9,12 +9,12 @@ use App\Models\Address;
 
 class AddressController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Address::class, 'address');
-        $this->middleware('auth:sanctum');
-    }
-    
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Address::class, 'address');
+    //     $this->middleware('auth:sanctum');
+    // }
+
     public function index(Request $request)
     {
         $addresses = $request->user()->addresses;
@@ -60,7 +60,7 @@ class AddressController extends Controller
             'address' => $address,
         ], 200);
     }
-    
+
     public function destroy(Address $address)
     {
         $address->delete();

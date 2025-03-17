@@ -19,8 +19,8 @@ class AdminUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => "Admin",
-            'email' => "admin@admin.com",
+            'name' => "yulita",
+            'email' => "yulita@admin.com",
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
