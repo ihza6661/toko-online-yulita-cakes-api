@@ -42,7 +42,7 @@ class ShoppingCartController extends Controller
         $cartItem = ShoppingCartItem::firstOrCreate(
             [
                 'shopping_cart_id' => $cart->id,
-                'product_id'       => $product->id,
+                'product_id' => $product->id,
             ],
             [
                 'qty' => 0,
@@ -85,4 +85,17 @@ class ShoppingCartController extends Controller
 
         return response()->json(['message' => 'Produk berhasil dihapus dari keranjang'], 200);
     }
+
+    public function clearCart()
+    {
+        $user = Auth::user();
+
+        // Hapus semua item di keranjang user
+        ShoppingCartItem::whereHas('shoppingCart', function ($query) use ($user) {
+            $query->where('site_user_id', $user->id);
+        })->delete();
+
+        return response()->json(['message' => 'Keranjang berhasil dikosongkan'], 200);
+    }
+
 }

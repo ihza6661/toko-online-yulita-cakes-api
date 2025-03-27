@@ -26,10 +26,10 @@ use App\Http\Controllers\SiteUser\ProductController as SiteUserProductController
 use App\Http\Controllers\SiteUser\ProductReviewController as SiteUserProductReviewController;
 
 Route::middleware('guest:sanctum')->group(function () {
-    Route::post('/admin/login',    [AdminAuthController::class, 'login']);
+    Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
     Route::post('/user/register', [AuthController::class, 'register']);
-    Route::post('/user/login',    [AuthController::class, 'login']);
+    Route::post('/user/login', [AuthController::class, 'login']);
 });
 
 // ADMIN USER
@@ -102,6 +102,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/shopping_cart', [ShoppingCartController::class, 'index']);
     Route::post('/user/shopping_cart', [ShoppingCartController::class, 'addToCart']);
     Route::put('/user/shopping_cart/{id}', [ShoppingCartController::class, 'updateCartItem']);
+    Route::middleware('auth:sanctum')->delete('/user/shopping_cart/clear', [ShoppingCartController::class, 'clearCart']);
+
     Route::delete('/user/shopping_cart/{id}', [ShoppingCartController::class, 'removeCartItem']);
 
     // Address
