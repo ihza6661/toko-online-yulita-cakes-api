@@ -22,7 +22,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'email wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
             'password.required' => 'Password wajib diisi.',
         ];
     }

@@ -9,8 +9,8 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['product_name', 'category_id', 'original_price', 'sale_price', 'stock', 'weight', 'description'];
+
+    protected $fillable = ['product_name', 'category_id', 'original_price', 'sale_price', 'stock', 'weight', 'description', 'label'];
 
     public function category()
     {

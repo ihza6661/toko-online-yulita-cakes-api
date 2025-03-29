@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function getAllProducts()
     {
-        $products = Product::with(['images', 'category'])->get();
+        $products = Product::with(['images', 'category'])->orderBy('updated_at', 'desc')->get();
         return response()->json($products, 200);
     }
 
